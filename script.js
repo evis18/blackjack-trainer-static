@@ -596,6 +596,7 @@ function render() {
     });
     return tab;
   }));
+  handTabsEl.closest(".hands-strip").hidden = hands.length <= 1;
 }
 
 controls.hit.addEventListener("click", hit);
