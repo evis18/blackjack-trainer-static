@@ -813,12 +813,13 @@ button.secondary {
   }
 
   .felt {
+    grid-template-columns: 1fr;
     gap: 8px;
   }
 
   .hand {
-    min-height: 152px;
-    padding: 9px;
+    min-height: 126px;
+    padding: 10px;
     border-radius: 8px;
   }
 
@@ -837,9 +838,9 @@ button.secondary {
   }
 
   .card {
-    width: clamp(50px, 8vw, 62px);
+    width: clamp(54px, 8.8vw, 68px);
     border-radius: 7px;
-    font-size: 1.05rem;
+    font-size: 1.18rem;
   }
 
   .cards.split-hands-board {
@@ -869,20 +870,20 @@ button.secondary {
   .controls {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 7px;
-    margin: 8px 0;
+    gap: 8px;
+    margin: 9px 0;
   }
 
   .deal-controls {
-    gap: 7px;
-    margin: 0 0 8px;
+    gap: 8px;
+    margin: 0 0 9px;
   }
 
   button,
   .bet-control {
-    min-height: 40px;
+    min-height: 46px;
     border-radius: 8px;
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 
   .bet-control {
