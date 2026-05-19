@@ -1,5 +1,6 @@
 :root {
   color-scheme: dark;
+  --app-height: 100vh;
   --felt: #123f35;
   --felt-light: #1a594b;
   --panel: #102a25;
@@ -1011,4 +1012,271 @@ button.secondary {
     font-size: 0.55rem;
     line-height: 1.1;
   }
+}
+
+html.phone-portrait,
+body.phone-portrait {
+  width: 100%;
+  height: var(--app-height);
+  overflow: hidden;
+}
+
+body.phone-portrait .table {
+  display: none;
+}
+
+body.phone-portrait .rotate-phone {
+  min-height: var(--app-height);
+  display: grid;
+  place-content: center;
+  gap: 10px;
+  padding: 28px;
+  text-align: center;
+}
+
+body.phone-portrait .rotate-phone h2 {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+body.phone-portrait .rotate-phone p {
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+html.phone-landscape,
+body.phone-landscape {
+  width: 100%;
+  height: var(--app-height);
+  overflow: hidden;
+}
+
+body.phone-landscape .rotate-phone {
+  display: none;
+}
+
+body.phone-landscape .table {
+  min-height: 0;
+  height: var(--app-height);
+  display: grid;
+  align-items: start;
+  overflow: hidden;
+  padding: 4px;
+}
+
+body.phone-landscape .trainer {
+  width: min(980px, 100%);
+  height: calc(var(--app-height) - 8px);
+  min-height: auto;
+  max-height: calc(var(--app-height) - 8px);
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(210px, 1fr);
+  grid-template-rows: auto auto auto auto auto 1fr;
+  column-gap: 8px;
+  row-gap: 5px;
+  padding: 6px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+body.phone-landscape .topbar {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: start;
+  gap: 8px;
+  margin-bottom: 0;
+}
+
+body.phone-landscape h1 {
+  font-size: 1.05rem;
+}
+
+body.phone-landscape .topbar p {
+  display: none;
+}
+
+body.phone-landscape .stats {
+  gap: 4px;
+}
+
+body.phone-landscape .stats span,
+body.phone-landscape .hand-tabs button {
+  padding: 4px 6px;
+  border-radius: 6px;
+  font-size: 0.68rem;
+}
+
+body.phone-landscape .felt {
+  grid-column: 1;
+  grid-row: 2 / 7;
+  grid-template-columns: 1fr;
+  gap: 5px;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+body.phone-landscape .hand {
+  min-height: 0;
+  padding: 6px;
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+body.phone-landscape .hand-heading {
+  margin-bottom: 5px;
+}
+
+body.phone-landscape .hand-heading h2,
+body.phone-landscape .hand-heading span {
+  font-size: 0.85rem;
+  line-height: 1.15;
+}
+
+body.phone-landscape .cards {
+  gap: 5px;
+}
+
+body.phone-landscape .card {
+  width: clamp(36px, 5.9vw, 48px);
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+body.phone-landscape .cards.split-hands-board {
+  gap: 5px;
+}
+
+body.phone-landscape .split-hand {
+  padding: 4px;
+}
+
+body.phone-landscape .split-hand-heading {
+  margin-bottom: 3px;
+}
+
+body.phone-landscape .split-hand-heading h3,
+body.phone-landscape .split-hand-heading span,
+body.phone-landscape .split-result {
+  font-size: 0.64rem;
+  line-height: 1.08;
+}
+
+body.phone-landscape .split-hand .card {
+  width: clamp(26px, 4vw, 34px);
+  font-size: 0.66rem;
+}
+
+body.phone-landscape .controls {
+  grid-column: 2;
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  margin: 0;
+}
+
+body.phone-landscape .deal-controls {
+  grid-column: 2;
+  grid-row: 3;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin: 0;
+}
+
+body.phone-landscape button,
+body.phone-landscape .bet-control {
+  min-height: 40px;
+  border-radius: 7px;
+  font-size: 0.88rem;
+}
+
+body.phone-landscape .bet-control {
+  justify-content: center;
+  padding: 0 10px;
+}
+
+body.phone-landscape .bet-control input {
+  width: 50px;
+  min-height: 25px;
+  font-size: 0.8rem;
+}
+
+body.phone-landscape .feedback {
+  grid-column: 2;
+  grid-row: 4;
+  min-height: 0;
+  max-height: 72px;
+  padding: 6px;
+  overflow: auto;
+}
+
+body.phone-landscape .feedback p {
+  font-size: 0.7rem;
+  line-height: 1.15;
+}
+
+body.phone-landscape .hands-strip {
+  grid-column: 2;
+  grid-row: 5;
+  min-height: 0;
+  max-height: 44px;
+  margin-top: 0;
+  overflow: auto;
+}
+
+body.phone-landscape .strategy-card-wrap {
+  grid-column: 2;
+  grid-row: 6;
+  margin-top: 0;
+  align-self: end;
+}
+
+body.phone-landscape .hold-button {
+  width: 100%;
+}
+
+body.phone-landscape .strategy-card {
+  inset: 8px;
+  width: calc(100vw - 16px);
+  max-height: calc(var(--app-height) - 16px);
+  overflow: auto;
+  padding: 8px;
+}
+
+body.phone-landscape .strategy-card h2 {
+  margin-bottom: 4px;
+  font-size: 1rem;
+}
+
+body.phone-landscape .card-note {
+  display: none;
+}
+
+body.phone-landscape .strategy-tables {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+}
+
+body.phone-landscape .strategy-table-section h3 {
+  margin-bottom: 4px;
+  font-size: 0.7rem;
+}
+
+body.phone-landscape .strategy-table-section table {
+  font-size: 0.58rem;
+}
+
+body.phone-landscape .strategy-table-section th,
+body.phone-landscape .strategy-table-section td {
+  padding: 2px 1px;
+  line-height: 1.08;
+}
+
+body.phone-landscape .strategy-table-section::after {
+  margin-top: 4px;
+  font-size: 0.55rem;
+  line-height: 1.1;
 }
