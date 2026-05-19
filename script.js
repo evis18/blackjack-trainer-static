@@ -12,6 +12,7 @@ const playerTotalEl = document.querySelector("#player-total");
 const playerLabelEl = document.querySelector("#player-label");
 const bankrollEl = document.querySelector("#bankroll");
 const accuracyEl = document.querySelector("#accuracy");
+const topResultEl = document.querySelector("#top-result");
 const strategyFeedbackEl = document.querySelector("#strategy-feedback");
 const roundFeedbackEl = document.querySelector("#round-feedback");
 const handTabsEl = document.querySelector("#hand-tabs");
@@ -166,6 +167,7 @@ function startRound() {
   hands = [newHand([draw(), draw()], currentBet())];
   activeHand = 0;
   roundOver = false;
+  topResultEl.textContent = "";
   strategyFeedbackEl.textContent = "Make your play.";
   strategyFeedbackEl.className = "";
   roundFeedbackEl.textContent = "Play your hand. Split hands are played left to right.";
@@ -489,7 +491,8 @@ function settleRound() {
     results.push(hand.result);
   }
 
-  roundFeedbackEl.textContent = `Hand result: ${results.join(", ")}.`;
+  topResultEl.textContent = `Hand result: ${results.join(", ")}`;
+  roundFeedbackEl.textContent = "Deal when ready.";
   updateStats();
   render();
 }

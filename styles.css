@@ -79,6 +79,27 @@ h1 {
   font-size: 0.9rem;
 }
 
+.top-result {
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 6px 10px;
+  border: 1px solid rgba(102, 194, 139, 0.38);
+  border-radius: 8px;
+  color: var(--ink);
+  background: rgba(102, 194, 139, 0.16);
+  font-size: 0.92rem;
+  font-weight: 900;
+  line-height: 1.15;
+  text-align: center;
+}
+
+.top-result:empty {
+  visibility: hidden;
+}
+
 .stats {
   gap: 8px;
   flex-wrap: wrap;
@@ -452,7 +473,7 @@ button.secondary {
 
   .topbar {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr minmax(0, 1fr) auto;
     align-items: start;
     gap: 6px;
     margin-bottom: 5px;
@@ -464,6 +485,13 @@ button.secondary {
 
   .topbar p {
     display: none;
+  }
+
+  .top-result {
+    min-height: 28px;
+    padding: 4px 6px;
+    border-radius: 6px;
+    font-size: 0.66rem;
   }
 
   .stats {
@@ -817,7 +845,7 @@ button.secondary {
   .topbar {
     grid-column: 1 / -1;
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr minmax(0, 1fr) auto;
     align-items: start;
     gap: 8px;
     margin-bottom: 0;
@@ -825,6 +853,12 @@ button.secondary {
 
   h1 {
     font-size: 1.05rem;
+  }
+
+  .top-result {
+    min-height: 26px;
+    padding: 3px 6px;
+    font-size: 0.66rem;
   }
 
   .stats {
@@ -850,13 +884,13 @@ button.secondary {
 
   .hand {
     min-height: 0;
-    padding: 6px;
+    padding: 4px;
     border-radius: 7px;
     overflow: hidden;
   }
 
   .hand-heading {
-    margin-bottom: 5px;
+    margin-bottom: 3px;
   }
 
   .hand-heading h2,
@@ -870,9 +904,9 @@ button.secondary {
   }
 
   .card {
-    width: clamp(36px, 5.9vw, 48px);
+    width: clamp(32px, 5.2vw, 42px);
     border-radius: 6px;
-    font-size: 0.9rem;
+    font-size: 0.78rem;
   }
 
   .cards.split-hands-board {
