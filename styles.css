@@ -775,29 +775,41 @@ button.secondary {
 }
 
 @media (max-height: 520px) and (min-aspect-ratio: 1/1) {
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+    height: 100dvh;
+    overflow: hidden;
+  }
+
   .rotate-phone {
     display: none;
   }
 
   .table {
     display: grid;
-  }
-
-  .table {
     align-items: start;
-    padding: 8px;
+    min-height: 0;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    padding: 4px;
   }
 
   .trainer {
     width: min(980px, 100%);
+    height: calc(100vh - 8px);
+    height: calc(100dvh - 8px);
     min-height: auto;
-    max-height: calc(100dvh - 16px);
+    max-height: calc(100vh - 8px);
+    max-height: calc(100dvh - 8px);
     display: grid;
-    grid-template-columns: minmax(0, 2fr) minmax(220px, 1fr);
+    grid-template-columns: minmax(0, 2fr) minmax(210px, 1fr);
     grid-template-rows: auto auto auto auto auto 1fr;
-    column-gap: 10px;
-    row-gap: 7px;
-    padding: 10px;
+    column-gap: 8px;
+    row-gap: 5px;
+    padding: 6px;
     border-radius: 8px;
     overflow: hidden;
   }
@@ -807,41 +819,44 @@ button.secondary {
     display: grid;
     grid-template-columns: 1fr auto;
     align-items: start;
-    gap: 10px;
-    margin-bottom: 8px;
+    gap: 8px;
+    margin-bottom: 0;
   }
 
   h1 {
-    font-size: 1.35rem;
+    font-size: 1.05rem;
   }
 
   .stats {
-    gap: 6px;
+    gap: 4px;
   }
 
   .stats span,
   .hand-tabs button {
-    padding: 6px 8px;
-    border-radius: 7px;
-    font-size: 0.78rem;
+    padding: 4px 6px;
+    border-radius: 6px;
+    font-size: 0.68rem;
   }
 
   .felt {
     grid-column: 1;
     grid-row: 2 / 7;
     grid-template-columns: 1fr;
-    gap: 7px;
+    gap: 5px;
     min-width: 0;
+    min-height: 0;
+    overflow: hidden;
   }
 
   .hand {
-    min-height: 108px;
-    padding: 8px;
-    border-radius: 8px;
+    min-height: 0;
+    padding: 6px;
+    border-radius: 7px;
+    overflow: hidden;
   }
 
   .hand-heading {
-    margin-bottom: 8px;
+    margin-bottom: 5px;
   }
 
   .hand-heading h2,
@@ -855,9 +870,9 @@ button.secondary {
   }
 
   .card {
-    width: clamp(42px, 6.6vw, 54px);
-    border-radius: 7px;
-    font-size: 1rem;
+    width: clamp(36px, 5.9vw, 48px);
+    border-radius: 6px;
+    font-size: 0.9rem;
   }
 
   .cards.split-hands-board {
@@ -865,11 +880,11 @@ button.secondary {
   }
 
   .split-hand {
-    padding: 6px;
+    padding: 4px;
   }
 
   .split-hand-heading {
-    margin-bottom: 5px;
+    margin-bottom: 3px;
   }
 
   .split-hand-heading h3,
@@ -880,8 +895,8 @@ button.secondary {
   }
 
   .split-hand .card {
-    width: clamp(30px, 4.6vw, 40px);
-    font-size: 0.74rem;
+    width: clamp(26px, 4vw, 34px);
+    font-size: 0.66rem;
   }
 
   .controls {
@@ -889,7 +904,7 @@ button.secondary {
     grid-row: 2;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
+    gap: 6px;
     margin: 0;
   }
 
@@ -898,15 +913,15 @@ button.secondary {
     grid-row: 3;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 8px;
+    gap: 6px;
     margin: 0;
   }
 
   button,
   .bet-control {
-    min-height: 48px;
-    border-radius: 8px;
-    font-size: 1rem;
+    min-height: 40px;
+    border-radius: 7px;
+    font-size: 0.88rem;
   }
 
   .bet-control {
@@ -915,22 +930,23 @@ button.secondary {
   }
 
   .bet-control input {
-    width: 58px;
-    min-height: 28px;
-    font-size: 0.88rem;
+    width: 50px;
+    min-height: 25px;
+    font-size: 0.8rem;
   }
 
   .feedback {
     grid-column: 2;
     grid-row: 4;
-    min-height: 76px;
-    padding: 8px;
+    min-height: 0;
+    max-height: 72px;
+    padding: 6px;
     overflow: auto;
   }
 
   .feedback p {
-    font-size: 0.78rem;
-    line-height: 1.2;
+    font-size: 0.7rem;
+    line-height: 1.15;
   }
 
   .strategy-card-wrap {
@@ -940,10 +956,15 @@ button.secondary {
     align-self: end;
   }
 
+  .hold-button {
+    width: 100%;
+  }
+
   .hands-strip {
     grid-column: 2;
     grid-row: 5;
     min-height: 0;
+    max-height: 44px;
     margin-top: 0;
     overflow: auto;
   }
