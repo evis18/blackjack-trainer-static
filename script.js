@@ -1,9 +1,9 @@
 const suits = ["♠", "♥", "♦", "♣"];
 const ranks = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 const upcards = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "A"];
-const dealerRevealDelay = 867;
-const dealerHitDelay = 1001;
-const handAdvanceDelay = 650;
+const dealerRevealDelay = 955;
+const dealerHitDelay = 1101;
+const handAdvanceDelay = 715;
 
 const dealerCardsEl = document.querySelector("#dealer-cards");
 const playerCardsEl = document.querySelector("#player-cards");
@@ -160,6 +160,11 @@ function currentBet() {
   return Math.min(value, 100);
 }
 
+function setRoundStatus(message) {
+  roundFeedbackEl.textContent = message;
+  topResultEl.textContent = message;
+}
+
 function startRound() {
   dealerPlaying = false;
   advancingHands = false;
@@ -167,10 +172,9 @@ function startRound() {
   hands = [newHand([draw(), draw()], currentBet())];
   activeHand = 0;
   roundOver = false;
-  topResultEl.textContent = "";
   strategyFeedbackEl.textContent = "Make your play.";
   strategyFeedbackEl.className = "";
-  roundFeedbackEl.textContent = "Play your hand. Split hands are played left to right.";
+  setRoundStatus("Play your hand. Split hands are played left to right.");
 
   const player = hands[0];
   const dealer = handValue(dealerHand);
@@ -353,10 +357,10 @@ function split() {
         splitAceHand.done = true;
       }
     }
-    roundFeedbackEl.textContent = "Split aces receive one card each. If another ace appears, you may resplit up to four hands.";
+    setRoundStatus("Split aces receive one card each. Resplit aces up to four hands.");
     moveToNextHand();
   } else {
-    roundFeedbackEl.textContent = `Split complete. Play Hand ${activeHand + 1} of ${hands.length}. You may double after splitting and resplit up to four hands.`;
+    setRoundStatus(`Split complete. Play Hand ${activeHand + 1} of ${hands.length}.`);
   }
 
   render();
@@ -372,11 +376,11 @@ function finishHand(message = null) {
   } else if (hands.length > 1) {
     advancingHands = true;
     const prefix = message ?? `Hand ${finishedHand} complete.`;
-    roundFeedbackEl.textContent = `${prefix} Next up: Hand ${handIndex + 1} of ${hands.length}.`;
+    setRoundStatus(`${prefix} Next up: Hand ${handIndex + 1} of ${hands.length}.`);
     window.setTimeout(() => {
       activeHand = handIndex;
       advancingHands = false;
-      roundFeedbackEl.textContent = `Play Hand ${activeHand + 1} of ${hands.length}.`;
+      setRoundStatus(`Play Hand ${activeHand + 1} of ${hands.length}.`);
       render();
     }, handAdvanceDelay);
   } else {
@@ -384,7 +388,7 @@ function finishHand(message = null) {
   }
 
   if (message && dealerPlaying) {
-    roundFeedbackEl.textContent = message;
+    setRoundStatus(message);
   }
 }
 
@@ -411,7 +415,7 @@ function sleep(ms) {
 
 async function dealerPlay() {
   dealerPlaying = true;
-  roundFeedbackEl.textContent = "Dealer reveals the hole card.";
+  setRoundStatus("Dealer reveals the hole card.");
   render();
   await sleep(dealerRevealDelay);
 
@@ -419,9 +423,9 @@ async function dealerPlay() {
     const value = handValue(dealerHand);
     if (value.total > 17) return;
     if (value.total === 17 && !value.soft) return;
-    roundFeedbackEl.textContent = value.total === 17 && value.soft
+    setRoundStatus(value.total === 17 && value.soft
       ? "Dealer hits soft 17."
-      : `Dealer hits ${value.total}.`;
+      : `Dealer hits ${value.total}.`);
     dealerHand.push(draw());
     render();
     await sleep(dealerHitDelay);
@@ -439,7 +443,7 @@ async function beginDealerTurn() {
     await dealerPlay();
   } else {
     dealerPlaying = true;
-    roundFeedbackEl.textContent = "Dealer reveals the hole card.";
+    setRoundStatus("Dealer reveals the hole card.");
     render();
     await sleep(dealerRevealDelay);
   }
