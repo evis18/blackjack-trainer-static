@@ -601,7 +601,7 @@ button.secondary {
   .bet-control input {
     width: 46px;
     min-height: 22px;
-    font-size: 0.72rem;
+    font-size: 16px;
   }
 
   .feedback {
@@ -966,7 +966,7 @@ button.secondary {
   .bet-control input {
     width: 50px;
     min-height: 25px;
-    font-size: 0.8rem;
+    font-size: 16px;
   }
 
   .feedback {

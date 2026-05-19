@@ -672,6 +672,13 @@ controls.split.addEventListener("click", split);
 controls.deal.addEventListener("click", startRound);
 betInput.addEventListener("change", () => {
   betInput.value = currentBet();
+  betInput.blur();
+});
+betInput.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    betInput.value = currentBet();
+    betInput.blur();
+  }
 });
 
 function showStrategyCard() {
