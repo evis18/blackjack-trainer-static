@@ -744,7 +744,7 @@ button.secondary {
   }
 }
 
-@media (max-width: 760px) and (orientation: portrait) {
+@media (max-width: 760px) and (max-aspect-ratio: 1/1) {
   body {
     min-height: 100dvh;
   }
@@ -774,7 +774,15 @@ button.secondary {
   }
 }
 
-@media (max-height: 520px) and (orientation: landscape) {
+@media (max-height: 520px) and (min-aspect-ratio: 1/1) {
+  .rotate-phone {
+    display: none;
+  }
+
+  .table {
+    display: grid;
+  }
+
   .table {
     align-items: start;
     padding: 8px;
