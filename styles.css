@@ -125,6 +125,60 @@ h1 {
   gap: 10px;
 }
 
+.cards.split-hands-board {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.split-hand {
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid var(--edge);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.split-hand.active {
+  border-color: var(--gold);
+  background: rgba(213, 174, 91, 0.12);
+  box-shadow: inset 0 0 0 1px rgba(213, 174, 91, 0.16);
+}
+
+.split-hand.done {
+  opacity: 0.78;
+}
+
+.split-hand-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.split-hand-heading h3 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.split-hand-heading span,
+.split-result {
+  color: var(--gold);
+  font-size: 0.75rem;
+  font-weight: 900;
+}
+
+.split-hand .card {
+  width: 58px;
+  font-size: 1rem;
+}
+
+.split-result {
+  margin-top: 8px;
+  color: var(--muted);
+}
+
 .card {
   width: 76px;
   aspect-ratio: 0.72;
@@ -446,6 +500,37 @@ button.secondary {
     gap: 3px;
   }
 
+  .cards.split-hands-board {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px;
+  }
+
+  .split-hand {
+    padding: 4px;
+    border-radius: 5px;
+  }
+
+  .split-hand-heading {
+    gap: 3px;
+    margin-bottom: 4px;
+  }
+
+  .split-hand-heading h3,
+  .split-hand-heading span,
+  .split-result {
+    font-size: 0.54rem;
+    line-height: 1.05;
+  }
+
+  .split-hand .cards {
+    gap: 2px;
+  }
+
+  .split-hand .card {
+    width: clamp(22px, 7.2vw, 32px);
+    font-size: 0.58rem;
+  }
+
   .card {
     width: clamp(28px, 9.5vw, 38px);
     border-radius: 5px;
@@ -568,6 +653,14 @@ button.secondary {
   .hand {
     min-height: 84px;
     padding: 5px;
+  }
+
+  .cards.split-hands-board {
+    gap: 3px;
+  }
+
+  .split-hand {
+    padding: 3px;
   }
 
   .card {

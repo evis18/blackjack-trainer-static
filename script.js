@@ -1,8 +1,9 @@
 const suits = ["♠", "♥", "♦", "♣"];
 const ranks = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 const upcards = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "A"];
-const dealerRevealDelay = 787;
-const dealerHitDelay = 908;
+const dealerRevealDelay = 867;
+const dealerHitDelay = 1001;
+const handAdvanceDelay = 650;
 
 const dealerCardsEl = document.querySelector("#dealer-cards");
 const playerCardsEl = document.querySelector("#player-cards");
@@ -33,6 +34,7 @@ let hands = [];
 let activeHand = 0;
 let roundOver = true;
 let dealerPlaying = false;
+let advancingHands = false;
 let units = 0;
 let correctPlays = 0;
 let totalPlays = 0;
@@ -159,6 +161,7 @@ function currentBet() {
 
 function startRound() {
   dealerPlaying = false;
+  advancingHands = false;
   dealerHand = [draw(), draw()];
   hands = [newHand([draw(), draw()], currentBet())];
   activeHand = 0;
@@ -360,19 +363,37 @@ function split() {
 function finishHand(message = null) {
   const finishedHand = activeHand + 1;
   hands[activeHand].done = true;
-  moveToNextHand();
-  if (!roundOver && !dealerPlaying) {
+
+  const handIndex = nextHandIndex();
+  if (handIndex === -1) {
+    beginDealerTurn();
+  } else if (hands.length > 1) {
+    advancingHands = true;
     const prefix = message ?? `Hand ${finishedHand} complete.`;
-    roundFeedbackEl.textContent = `${prefix} Now play Hand ${activeHand + 1} of ${hands.length}.`;
-  } else if (message && dealerPlaying) {
+    roundFeedbackEl.textContent = `${prefix} Next up: Hand ${handIndex + 1} of ${hands.length}.`;
+    window.setTimeout(() => {
+      activeHand = handIndex;
+      advancingHands = false;
+      roundFeedbackEl.textContent = `Play Hand ${activeHand + 1} of ${hands.length}.`;
+      render();
+    }, handAdvanceDelay);
+  } else {
+    activeHand = handIndex;
+  }
+
+  if (message && dealerPlaying) {
     roundFeedbackEl.textContent = message;
   }
 }
 
-function moveToNextHand() {
+function nextHandIndex() {
   const nextIndex = hands.findIndex((hand, index) => index > activeHand && !hand.done);
   const fallbackIndex = hands.findIndex((hand) => !hand.done);
-  const handIndex = nextIndex === -1 ? fallbackIndex : nextIndex;
+  return nextIndex === -1 ? fallbackIndex : nextIndex;
+}
+
+function moveToNextHand() {
+  const handIndex = nextHandIndex();
   if (handIndex === -1) {
     beginDealerTurn();
     return;
@@ -557,6 +578,42 @@ function renderCard(card, hidden = false) {
   return el;
 }
 
+function playerTotalText(hand) {
+  const value = handValue(hand.cards);
+  if (!hand.done && !roundOver) return "Count it";
+  return `${value.soft ? "Soft" : "Total"} ${value.total}`;
+}
+
+function renderPlayerHandPanel(hand, index) {
+  const panel = document.createElement("article");
+  panel.className = `split-hand ${index === activeHand ? "active" : ""} ${hand.done ? "done" : ""}`;
+
+  const header = document.createElement("div");
+  header.className = "split-hand-heading";
+
+  const title = document.createElement("h3");
+  title.textContent = `Hand ${index + 1}`;
+
+  const meta = document.createElement("span");
+  meta.textContent = `${playerTotalText(hand)} • Bet ${hand.bet}`;
+
+  const cardRow = document.createElement("div");
+  cardRow.className = "cards";
+  cardRow.replaceChildren(...hand.cards.map((card) => renderCard(card)));
+
+  header.append(title, meta);
+  panel.append(header, cardRow);
+
+  if (hand.result) {
+    const result = document.createElement("p");
+    result.className = "split-result";
+    result.textContent = hand.result;
+    panel.append(result);
+  }
+
+  return panel;
+}
+
 function render() {
   const hideHole = !roundOver && !dealerPlaying;
   dealerCardsEl.replaceChildren(...dealerHand.map((card, index) => renderCard(card, index === 1 && hideHole)));
@@ -564,22 +621,24 @@ function render() {
   dealerTotalEl.textContent = hideHole ? `Showing ${dealerVisible.total}` : `Total ${dealerVisible.total}`;
 
   const hand = hands[activeHand] ?? hands[0];
-  playerCardsEl.replaceChildren(...hand.cards.map((card) => renderCard(card)));
-  const playerValue = handValue(hand.cards);
-  const showPlayerTotal = hand.done || roundOver;
-  const totalText = showPlayerTotal
-    ? `${playerValue.soft ? "Soft" : "Total"} ${playerValue.total}`
-    : "Count it";
-  playerTotalEl.textContent = `${totalText} • Bet ${hand.bet}`;
-  playerLabelEl.textContent = hands.length > 1 ? `Hand ${activeHand + 1} of ${hands.length}` : "Your hand";
+  if (hands.length > 1) {
+    playerCardsEl.classList.add("split-hands-board");
+    playerCardsEl.replaceChildren(...hands.map((item, index) => renderPlayerHandPanel(item, index)));
+  } else {
+    playerCardsEl.classList.remove("split-hands-board");
+    playerCardsEl.replaceChildren(...hand.cards.map((card) => renderCard(card)));
+  }
 
-  const activeHandIsPlayable = !roundOver && !dealerPlaying && !hand.done;
+  playerTotalEl.textContent = `${playerTotalText(hand)} • Bet ${hand.bet}`;
+  playerLabelEl.textContent = hands.length > 1 ? `Playing Hand ${activeHand + 1} of ${hands.length}` : "Your hand";
+
+  const activeHandIsPlayable = !roundOver && !dealerPlaying && !advancingHands && !hand.done;
   const splitAcesAwaitingResplit = hand.splitAces && canSplit(hand);
   controls.hit.disabled = !activeHandIsPlayable || hand.splitAces;
   controls.stand.disabled = !activeHandIsPlayable || splitAcesAwaitingResplit;
   controls.double.disabled = !activeHandIsPlayable || !canDouble(hand);
   controls.split.disabled = !activeHandIsPlayable || !canSplit(hand);
-    controls.deal.disabled = dealerPlaying;
+  controls.deal.disabled = dealerPlaying || !roundOver;
   betInput.disabled = !roundOver || dealerPlaying;
 
   handTabsEl.replaceChildren(...hands.map((item, index) => {
