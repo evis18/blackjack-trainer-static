@@ -28,21 +28,6 @@ const controls = {
   card: document.querySelector("#strategy-card-button"),
 };
 
-function setViewportMode() {
-  const viewport = window.visualViewport;
-  const width = viewport?.width ?? window.innerWidth;
-  const height = viewport?.height ?? window.innerHeight;
-  const shortSide = Math.min(width, height);
-  const isPhoneish = shortSide <= 520;
-  const isLandscape = width > height;
-
-  document.documentElement.style.setProperty("--app-height", `${height}px`);
-  document.documentElement.classList.toggle("phone-landscape", isPhoneish && isLandscape);
-  document.documentElement.classList.toggle("phone-portrait", isPhoneish && !isLandscape);
-  document.body.classList.toggle("phone-landscape", isPhoneish && isLandscape);
-  document.body.classList.toggle("phone-portrait", isPhoneish && !isLandscape);
-}
-
 let deck = [];
 let dealerHand = [];
 let hands = [];
@@ -701,11 +686,7 @@ controls.card.addEventListener("keydown", (event) => {
 });
 controls.card.addEventListener("keyup", hideStrategyCard);
 controls.card.addEventListener("blur", hideStrategyCard);
-window.addEventListener("resize", setViewportMode);
-window.visualViewport?.addEventListener("resize", setViewportMode);
-window.visualViewport?.addEventListener("scroll", setViewportMode);
 
-setViewportMode();
 deck = makeDeck();
 renderStrategyCard();
 updateStats();
