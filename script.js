@@ -688,6 +688,19 @@ controls.stand.addEventListener("click", stand);
 controls.double.addEventListener("click", doubleDown);
 controls.split.addEventListener("click", split);
 controls.deal.addEventListener("click", startRound);
+betInput.addEventListener("focus", () => {
+  window.setTimeout(() => {
+    betInput.select();
+  }, 0);
+});
+betInput.addEventListener("pointerup", () => {
+  window.setTimeout(() => {
+    betInput.select();
+  }, 0);
+});
+betInput.addEventListener("input", () => {
+  betInput.value = betInput.value.replace(/\D/g, "").slice(0, 3);
+});
 betInput.addEventListener("change", () => {
   betInput.value = currentBet();
   betInput.blur();
