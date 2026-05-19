@@ -622,6 +622,24 @@ function renderPlayerHandPanel(hand, index) {
 }
 
 function render() {
+  if (!dealerHand.length || !hands.length) {
+    dealerCardsEl.replaceChildren();
+    dealerTotalEl.textContent = "";
+    playerCardsEl.classList.remove("split-hands-board");
+    playerCardsEl.replaceChildren();
+    playerTotalEl.textContent = `Bet ${currentBet()}`;
+    playerLabelEl.textContent = "Your hand";
+    controls.hit.disabled = true;
+    controls.stand.disabled = true;
+    controls.double.disabled = true;
+    controls.split.disabled = true;
+    controls.deal.disabled = false;
+    betInput.disabled = false;
+    handTabsEl.replaceChildren();
+    handTabsEl.closest(".hands-strip").hidden = true;
+    return;
+  }
+
   const hideHole = !roundOver && !dealerPlaying;
   dealerCardsEl.replaceChildren(...dealerHand.map((card, index) => renderCard(card, index === 1 && hideHole)));
   const dealerVisible = hideHole ? handValue([dealerHand[0]]) : handValue(dealerHand);
@@ -673,11 +691,13 @@ controls.deal.addEventListener("click", startRound);
 betInput.addEventListener("change", () => {
   betInput.value = currentBet();
   betInput.blur();
+  if (roundOver) render();
 });
 betInput.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     betInput.value = currentBet();
     betInput.blur();
+    if (roundOver) render();
   }
 });
 
@@ -704,4 +724,7 @@ controls.card.addEventListener("blur", hideStrategyCard);
 deck = makeDeck();
 renderStrategyCard();
 updateStats();
-startRound();
+topResultEl.textContent = "Set your bet, then deal.";
+strategyFeedbackEl.textContent = "Make your play.";
+roundFeedbackEl.textContent = "Set your bet, then deal.";
+render();
