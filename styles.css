@@ -488,10 +488,6 @@ button.secondary {
     display: none;
   }
 
-  .topbar .top-result {
-    display: flex;
-  }
-
   .top-result {
     min-height: 28px;
     padding: 4px 6px;
@@ -857,13 +853,13 @@ button.secondary {
   }
 
   h1 {
-    font-size: 0.95rem;
+    font-size: 1.05rem;
   }
 
   .top-result {
-    min-height: 24px;
-    padding: 3px 6px;
-    font-size: 0.66rem;
+    min-height: 28px;
+    padding: 4px 6px;
+    font-size: 0.7rem;
   }
 
   .stats {
@@ -882,7 +878,6 @@ button.secondary {
     grid-row: 2 / 6;
     grid-template-columns: 1fr;
     gap: 5px;
-    grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
     min-width: 0;
     min-height: 0;
     overflow: hidden;
@@ -890,29 +885,29 @@ button.secondary {
 
   .hand {
     min-height: 0;
-    padding: 4px;
+    padding: 6px;
     border-radius: 7px;
     overflow: hidden;
   }
 
   .hand-heading {
-    margin-bottom: 3px;
+    margin-bottom: 5px;
   }
 
   .hand-heading h2,
   .hand-heading span {
-    font-size: 0.74rem;
+    font-size: 0.85rem;
     line-height: 1.15;
   }
 
   .cards {
-    gap: 4px;
+    gap: 5px;
   }
 
   .card {
-    width: clamp(32px, 5.2vw, 42px);
+    width: clamp(36px, 5.9vw, 48px);
     border-radius: 6px;
-    font-size: 0.78rem;
+    font-size: 0.9rem;
   }
 
   .cards.split-hands-board {
@@ -1124,21 +1119,17 @@ body.phone-landscape .topbar {
 }
 
 body.phone-landscape h1 {
-  font-size: 0.95rem;
+  font-size: 1.05rem;
 }
 
 body.phone-landscape .top-result {
-  min-height: 24px;
-  padding: 3px 6px;
-  font-size: 0.66rem;
+  min-height: 28px;
+  padding: 4px 6px;
+  font-size: 0.7rem;
 }
 
 body.phone-landscape .topbar p {
   display: none;
-}
-
-body.phone-landscape .topbar .top-result {
-  display: flex;
 }
 
 body.phone-landscape .stats {
@@ -1156,7 +1147,6 @@ body.phone-landscape .felt {
   grid-column: 1;
   grid-row: 2 / 6;
   grid-template-columns: 1fr;
-  grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
   gap: 5px;
   min-width: 0;
   min-height: 0;
@@ -1165,29 +1155,29 @@ body.phone-landscape .felt {
 
 body.phone-landscape .hand {
   min-height: 0;
-  padding: 4px;
+  padding: 6px;
   border-radius: 7px;
   overflow: hidden;
 }
 
 body.phone-landscape .hand-heading {
-  margin-bottom: 3px;
+  margin-bottom: 5px;
 }
 
 body.phone-landscape .hand-heading h2,
 body.phone-landscape .hand-heading span {
-  font-size: 0.74rem;
+  font-size: 0.85rem;
   line-height: 1.15;
 }
 
 body.phone-landscape .cards {
-  gap: 4px;
+  gap: 5px;
 }
 
 body.phone-landscape .card {
-  width: clamp(32px, 5.2vw, 42px);
+  width: clamp(36px, 5.9vw, 48px);
   border-radius: 6px;
-  font-size: 0.78rem;
+  font-size: 0.9rem;
 }
 
 body.phone-landscape .cards.split-hands-board {
