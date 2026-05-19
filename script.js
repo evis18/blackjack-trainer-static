@@ -687,7 +687,21 @@ controls.hit.addEventListener("click", hit);
 controls.stand.addEventListener("click", stand);
 controls.double.addEventListener("click", doubleDown);
 controls.split.addEventListener("click", split);
-controls.deal.addEventListener("click", startRound);
+function settleBetEntry() {
+  betInput.value = currentBet();
+  betInput.blur();
+  window.setTimeout(() => {
+    window.scrollTo(0, 0);
+  }, 60);
+}
+
+controls.deal.addEventListener("pointerdown", () => {
+  if (document.activeElement === betInput) settleBetEntry();
+});
+controls.deal.addEventListener("click", () => {
+  settleBetEntry();
+  startRound();
+});
 betInput.addEventListener("focus", () => {
   window.setTimeout(() => {
     betInput.select();
@@ -702,14 +716,12 @@ betInput.addEventListener("input", () => {
   betInput.value = betInput.value.replace(/\D/g, "").slice(0, 3);
 });
 betInput.addEventListener("change", () => {
-  betInput.value = currentBet();
-  betInput.blur();
+  settleBetEntry();
   if (roundOver) render();
 });
 betInput.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
-    betInput.value = currentBet();
-    betInput.blur();
+    settleBetEntry();
     if (roundOver) render();
   }
 });
