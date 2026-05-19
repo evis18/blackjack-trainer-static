@@ -792,12 +792,18 @@ button.secondary {
     width: min(980px, 100%);
     min-height: auto;
     max-height: calc(100dvh - 16px);
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(220px, 1fr);
+    grid-template-rows: auto auto auto auto auto 1fr;
+    column-gap: 10px;
+    row-gap: 7px;
     padding: 10px;
     border-radius: 8px;
-    overflow: auto;
+    overflow: hidden;
   }
 
   .topbar {
+    grid-column: 1 / -1;
     display: grid;
     grid-template-columns: 1fr auto;
     align-items: start;
@@ -821,13 +827,16 @@ button.secondary {
   }
 
   .felt {
+    grid-column: 1;
+    grid-row: 2 / 7;
     grid-template-columns: 1fr;
-    gap: 8px;
+    gap: 7px;
+    min-width: 0;
   }
 
   .hand {
-    min-height: 126px;
-    padding: 10px;
+    min-height: 108px;
+    padding: 8px;
     border-radius: 8px;
   }
 
@@ -842,17 +851,17 @@ button.secondary {
   }
 
   .cards {
-    gap: 6px;
+    gap: 5px;
   }
 
   .card {
-    width: clamp(54px, 8.8vw, 68px);
+    width: clamp(42px, 6.6vw, 54px);
     border-radius: 7px;
-    font-size: 1.18rem;
+    font-size: 1rem;
   }
 
   .cards.split-hands-board {
-    gap: 6px;
+    gap: 5px;
   }
 
   .split-hand {
@@ -871,30 +880,37 @@ button.secondary {
   }
 
   .split-hand .card {
-    width: clamp(36px, 5.8vw, 46px);
-    font-size: 0.82rem;
+    width: clamp(30px, 4.6vw, 40px);
+    font-size: 0.74rem;
   }
 
   .controls {
+    grid-column: 2;
+    grid-row: 2;
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 8px;
-    margin: 9px 0;
+    margin: 0;
   }
 
   .deal-controls {
+    grid-column: 2;
+    grid-row: 3;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 8px;
-    margin: 0 0 9px;
+    margin: 0;
   }
 
   button,
   .bet-control {
-    min-height: 46px;
+    min-height: 48px;
     border-radius: 8px;
     font-size: 1rem;
   }
 
   .bet-control {
+    justify-content: center;
     padding: 0 10px;
   }
 
@@ -905,8 +921,11 @@ button.secondary {
   }
 
   .feedback {
-    min-height: 48px;
+    grid-column: 2;
+    grid-row: 4;
+    min-height: 76px;
     padding: 8px;
+    overflow: auto;
   }
 
   .feedback p {
@@ -915,7 +934,18 @@ button.secondary {
   }
 
   .strategy-card-wrap {
-    margin-top: 7px;
+    grid-column: 2;
+    grid-row: 6;
+    margin-top: 0;
+    align-self: end;
+  }
+
+  .hands-strip {
+    grid-column: 2;
+    grid-row: 5;
+    min-height: 0;
+    margin-top: 0;
+    overflow: auto;
   }
 
   .strategy-card {
