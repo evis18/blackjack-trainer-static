@@ -940,7 +940,7 @@ button.secondary {
     grid-column: 2;
     grid-row: 4;
     min-height: 0;
-    max-height: 92px;
+    max-height: 72px;
     padding: 6px;
     overflow: auto;
   }
@@ -1208,7 +1208,7 @@ body.phone-landscape .feedback {
   grid-column: 2;
   grid-row: 4;
   min-height: 0;
-  max-height: 92px;
+  max-height: 72px;
   padding: 6px;
   overflow: auto;
 }
