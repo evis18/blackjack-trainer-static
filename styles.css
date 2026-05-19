@@ -807,7 +807,7 @@ button.secondary {
     max-height: calc(100dvh - 8px);
     display: grid;
     grid-template-columns: minmax(0, 2fr) minmax(210px, 1fr);
-    grid-template-rows: auto auto auto minmax(112px, 1fr) auto;
+    grid-template-rows: auto auto auto auto auto 1fr;
     column-gap: 8px;
     row-gap: 5px;
     padding: 6px;
@@ -841,7 +841,7 @@ button.secondary {
 
   .felt {
     grid-column: 1;
-    grid-row: 2 / 6;
+    grid-row: 2 / 7;
     grid-template-columns: 1fr;
     gap: 5px;
     min-width: 0;
@@ -939,11 +939,11 @@ button.secondary {
   .feedback {
     grid-column: 2;
     grid-row: 4;
-    min-height: 112px;
-    height: 100%;
-    display: block;
+    min-height: 88px;
+    max-height: none;
+    align-content: start;
     padding: 8px;
-    overflow: visible;
+    overflow: auto;
   }
 
   .feedback p {
@@ -953,7 +953,7 @@ button.secondary {
 
   .strategy-card-wrap {
     grid-column: 2;
-    grid-row: 5;
+    grid-row: 6;
     margin-top: 0;
     align-self: end;
   }
@@ -963,7 +963,12 @@ button.secondary {
   }
 
   .hands-strip {
-    display: none;
+    grid-column: 2;
+    grid-row: 5;
+    min-height: 0;
+    max-height: 44px;
+    margin-top: 0;
+    overflow: auto;
   }
 
   .strategy-card {
@@ -1067,7 +1072,7 @@ body.phone-landscape .trainer {
   max-height: calc(var(--app-height) - 8px);
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(210px, 1fr);
-  grid-template-rows: auto auto auto minmax(112px, 1fr) auto;
+  grid-template-rows: auto auto auto auto auto 1fr;
   column-gap: 8px;
   row-gap: 5px;
   padding: 6px;
@@ -1105,7 +1110,7 @@ body.phone-landscape .hand-tabs button {
 
 body.phone-landscape .felt {
   grid-column: 1;
-  grid-row: 2 / 6;
+  grid-row: 2 / 7;
   grid-template-columns: 1fr;
   gap: 5px;
   min-width: 0;
@@ -1203,11 +1208,11 @@ body.phone-landscape .bet-control input {
 body.phone-landscape .feedback {
   grid-column: 2;
   grid-row: 4;
-  min-height: 112px;
-  height: 100%;
-  display: block;
+  min-height: 88px;
+  max-height: none;
+  align-content: start;
   padding: 8px;
-  overflow: visible;
+  overflow: auto;
 }
 
 body.phone-landscape .feedback p {
@@ -1216,12 +1221,17 @@ body.phone-landscape .feedback p {
 }
 
 body.phone-landscape .hands-strip {
-  display: none;
+  grid-column: 2;
+  grid-row: 5;
+  min-height: 0;
+  max-height: 44px;
+  margin-top: 0;
+  overflow: auto;
 }
 
 body.phone-landscape .strategy-card-wrap {
   grid-column: 2;
-  grid-row: 5;
+  grid-row: 6;
   margin-top: 0;
   align-self: end;
 }
